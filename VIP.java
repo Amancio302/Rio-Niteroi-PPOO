@@ -1,9 +1,9 @@
-public class CarroExecutivo extends Veiculo{
+public class VIP extends Passageiro{
     
     private String documentoOficial;
 
-    CarroExecutivo (String placa, String marca, String modelo, Double peso, int qtdOcupantes, String documentoOficial) {
-        super(placa, marca, modelo, peso, 4, qtdOcupantes, 0);
+    VIP (String cpf, String nome, String sexo, int idade, String documentoOficial) {
+        super(cpf, nome, sexo, idade, 0);
         this.documentoOficial = documentoOficial;
     }
 

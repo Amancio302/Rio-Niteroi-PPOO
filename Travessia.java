@@ -1,19 +1,19 @@
 public class Travessia extends Evento{
     
-    private Veiculo veiculo;
+    private Passageiro passageiro;
     private Viagem viagem;
     private long tempoAtendimento;
     private long tempoEmbarque;
     private long tempoDesembarque;
 
-    Travessia (Veiculo veiculo, Viagem viagem) {
+    Travessia (Passageiro passageiro, Viagem viagem) {
         super();
-        this.veiculo = veiculo;
+        this.passageiro = passageiro;
         this.viagem = viagem;
     }
 
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
+    public void setPassageiro(Passageiro passageiro) {
+        this.passageiro = passageiro;
     }
 
     public void setViagem(Viagem viagem) {
@@ -32,8 +32,8 @@ public class Travessia extends Evento{
         this.tempoDesembarque = tempoDesembarque;
     }
 
-    public Veiculo getVeiculo() {
-        return veiculo;
+    public Passageiro getPassageiro() {
+        return passageiro;
     }
 
     public Viagem getViagem() {

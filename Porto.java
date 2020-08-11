@@ -3,11 +3,11 @@ import java.util.*;
 public class Porto{
 	
 	private ArrayList<Balsa> balsasDisponiveis;
-	private ArrayList<Veiculo> filaComum;
-	private ArrayList<Veiculo> filaExpress;
+	private ArrayList<Passageiro> filaComum;
+	private ArrayList<Passageiro> filaExpress;
 	
 	
-	public Porto(ArrayList<Balsa> balsas, ArrayList<Veiculo> filaCm, ArrayList<Veiculo> filaEx){
+	public Porto(ArrayList<Balsa> balsas, ArrayList<Passageiro> filaCm, ArrayList<Passageiro> filaEx){
 		balsasDisponiveis = balsas;
 		filaComum = filaCm;
 		filaExpress = filaEx;
@@ -17,11 +17,11 @@ public class Porto{
         this.balsasDisponiveis = balsas;
     }
     
-    public void setFilaComum(ArrayList<Veiculo> filaCm){
+    public void setFilaComum(ArrayList<Passageiro> filaCm){
         this.filaComum = filaCm;
     }
     
-    public void setFilaExpress(ArrayList<Veiculo> filaEx){
+    public void setFilaExpress(ArrayList<Passageiro> filaEx){
         this.filaExpress = filaEx;
     }
     
@@ -29,16 +29,16 @@ public class Porto{
 		return balsasDisponiveis;
 	}
 	
-    public ArrayList<Veiculo> getFilaComum(){
+    public ArrayList<Passageiro> getFilaComum(){
 		return filaComum;
 	}
 	
-    public ArrayList<Veiculo> getFilaExpress(){
+    public ArrayList<Passageiro> getFilaExpress(){
 		return filaExpress;
 	}
 	
-	public void entrarNaFila(Veiculo v, String fila){}
-	public void sairDaFila(Veiculo v){}
+	public void entrarNaFila(Passageiro p, String fila){}
+	public void sairDaFila(Passageiro p){}
 	public void embarcarBalsa(Balsa b){}
 	public void desembarcarBalsa(Balsa b){}
 }

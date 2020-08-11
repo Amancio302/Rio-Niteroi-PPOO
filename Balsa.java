@@ -6,14 +6,14 @@ public class Balsa {
     private Double preco;
     private long tempoViagem;
     int qtdEspacos;
-    ArrayList<Veiculo> veiculos;
+    ArrayList<Passageiro> passageiros;
 
     Balsa (Double cargaMaxima, Double preco, long tempoViagem, int qtdEspacos) {
         this.cargaMaxima = cargaMaxima;
         this.preco = preco;
         this.tempoViagem = tempoViagem;
         this.qtdEspacos = qtdEspacos;
-        this.veiculos = new ArrayList<Veiculo>();
+        this.passageiros = new ArrayList<Passageiro>();
     }
 
     public void setCargaMaxima(Double cargaMaxima) {
@@ -48,20 +48,20 @@ public class Balsa {
         return tempoViagem;
     }
 
-    public ArrayList<Veiculo> getVeiculos() {
-        return veiculos;
+    public ArrayList<Passageiro> getPassageiros() {
+        return passageiros;
     }
 
-    void embarque(Veiculo veiculo) {
-        this.veiculos.add(veiculo);
+    void embarque(Passageiro passageiro) {
+        this.passageiros.add(passageiro);
     }
 
-    void desembarque(Veiculo veiculo) {
-        this.veiculos.remove(veiculo);
+    void desembarque(Passageiro passageiro) {
+        this.passageiros.remove(passageiro);
     }
 
     void desembarque() {
-        this.veiculos.clear();
+        this.passageiros.clear();
     }
 
 }
