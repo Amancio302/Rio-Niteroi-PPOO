@@ -1,7 +1,10 @@
 public class BalsaExpress extends Balsa{
     
-    BalsaExpress (Double cargaMaxima, Double preco) {
-        super(cargaMaxima, preco, 7000, 40);
+    // Versão da Classe BalsaExpress
+    private static final long serialVersionUID = 1L;
+
+    BalsaExpress() {
+        super(50, 70, 8000);
     }
 
 }

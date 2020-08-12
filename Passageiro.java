@@ -1,16 +1,21 @@
-public class Passageiro implements Comparable<Passageiro>{
+import java.io.Serializable;
+
+public class Passageiro implements Comparable<Passageiro>, Serializable{
+
+    // Versão da Classe Passageiro
+    private static final long serialVersionUID = 1L;
 
     private String cpf;
     private String nome;
-    private String sexo;
     private int idade;
+    private String sexo;
     private int prioridade;
 
-    Passageiro (String cpf, String nome, String sexo, int idade, int prioridade) {
+    Passageiro (String cpf, String nome, int idade, String sexo, int prioridade) {
         this.cpf = cpf;
         this.nome = nome;
-        this.sexo = sexo;
         this.idade = idade;
+        this.sexo = sexo;
         this.prioridade = prioridade;
     }
 
@@ -18,36 +23,36 @@ public class Passageiro implements Comparable<Passageiro>{
         this.cpf = cpf;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public void setPrioridade(int prioridade) {
-        this.prioridade = prioridade;
-    }
-
     public String getCpf() {
         return cpf;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public String getSexo() {
-        return sexo;
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 
     public int getIdade() {
         return idade;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setPrioridade(int prioridade) {
+        this.prioridade = prioridade;
     }
 
     public int getPrioridade() {

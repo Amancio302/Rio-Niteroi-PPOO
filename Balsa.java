@@ -1,67 +1,50 @@
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Balsa {
+public class Balsa implements Serializable{
     
-    private Double cargaMaxima;
-    private Double preco;
-    private long tempoViagem;
-    int qtdEspacos;
-    ArrayList<Passageiro> passageiros;
+    // Versão da Classe Balsa
+    private static final long serialVersionUID = 1L;
 
-    Balsa (Double cargaMaxima, Double preco, long tempoViagem, int qtdEspacos) {
+    // Carga máxima de passageiros
+    private int cargaMaxima;
+    // Preço da passagem
+    private float preco;
+    // Tempo da viagem em milissegundos
+    private long tempoViagem;
+
+    Balsa (int cargaMaxima, float preco, long tempoViagem) {
         this.cargaMaxima = cargaMaxima;
         this.preco = preco;
         this.tempoViagem = tempoViagem;
-        this.qtdEspacos = qtdEspacos;
-        this.passageiros = new ArrayList<Passageiro>();
     }
 
-    public void setCargaMaxima(Double cargaMaxima) {
+    public void setCargaMaxima(int cargaMaxima) {
         this.cargaMaxima = cargaMaxima;
     }
 
-    public void setPreco(Double preco) {
+    public int getCargaMaxima() {
+        return cargaMaxima;
+    }
+
+    public void setPreco(float preco) {
         this.preco = preco;
+    }
+
+    public float getPreco() {
+        return preco;
     }
 
     public void setTempoViagem(long tempoViagem) {
         this.tempoViagem = tempoViagem;
     }
 
-    public void setQtdEspacos(int qtdEspacos) {
-        this.qtdEspacos = qtdEspacos;
-    }
-
-    public Double getCargaMaxima() {
-        return cargaMaxima;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public int getQtdEspacos() {
-        return qtdEspacos;
-    }
-
-    public long getTempoViagem() {
+    public Long getTempoViagem() {
         return tempoViagem;
     }
 
-    public ArrayList<Passageiro> getPassageiros() {
-        return passageiros;
-    }
-
-    void embarque(Passageiro passageiro) {
-        this.passageiros.add(passageiro);
-    }
-
-    void desembarque(Passageiro passageiro) {
-        this.passageiros.remove(passageiro);
-    }
-
-    void desembarque() {
-        this.passageiros.clear();
+    @Override
+    public String toString() {
+        return cargaMaxima + " " + preco + " " + tempoViagem;
     }
 
 }

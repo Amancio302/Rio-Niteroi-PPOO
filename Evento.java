@@ -1,22 +1,39 @@
-public class Evento {
+import java.io.Serializable;
+
+public class Evento implements Serializable{
     
-    private long tempoInicio;
-    private long tempoFim;
+    // Versão da Classe Evento
+    private static final long serialVersionUID = 1L;
+
+    // Tempo de início do evento, em milissegundos
+    private long inicio;
+    // Tempo de término do evento, em milissegundos
+    private long fim;
 
     Evento () {
-        this.tempoInicio = System.currentTimeMillis();
+        this.inicio = -1;
+        this.fim = -1;
     }
 
-    public long getTempoInicio() {
-        return tempoInicio;
+    public void setInicio(long inicio) {
+        this.inicio = inicio;
     }
 
-    public long getTempoFim() {
-        return tempoFim;
+    public long getInicio() {
+        return inicio;
     }
 
-    public void encerrarEvento() {
-        this.tempoFim = System.currentTimeMillis();
+    public void setFim(long fim) {
+        this.fim = fim;
+    }
+
+    public long getFim() {
+        return fim;
+    }
+
+    @Override
+    public String toString() {
+        return "\nInicio: " + inicio + "\nFim: " + fim;
     }
 
 }

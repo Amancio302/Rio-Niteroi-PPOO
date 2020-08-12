@@ -1,47 +1,90 @@
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
+/**
+ * Classe Simulador
+ * Reponsável por simular toda a operação do porto
+ */
+public class Simulador implements Serializable{
 
-public class Simulador {
+    // Versão da Classe Simulador
+    private static final long serialVersionUID = 1L;
 
-	Porto portoRj;
-	Porto portoNt;
-	ArrayList<Balsa> balsas;
-    ArrayList<Passageiro> passageiros;
+    private Porto porto1;
+    private Porto porto2;
+    private Evento simulacao;
+    private ArrayList<Evento> eventosConcluidos;
     
-    Simulador (Porto portoRJ, Porto PortoNt) {
+    Simulador () {
+        this.porto1 = null;
+        this.porto2 = null;
+        this.simulacao = new Evento();
+        eventosConcluidos = new ArrayList<Evento>();
+    }
 
+    public void setPorto1(Porto porto1) {
+        this.porto1 = porto1;
     }
-	
-	public Porto getPortoRj() {
-		return portoRj;
+
+    public Porto getPorto1() {
+        return porto1;
     }
-    
-	public void setPortoRj(Porto portoRj) {
-		this.portoRj = portoRj;
+
+    public void setPorto2(Porto porto2) {
+        this.porto2 = porto2;
     }
-    
-	public Porto getPortoNt() {
-		return portoNt;
+
+    public Porto getPorto2() {
+        return porto2;
     }
-    
-	public void setPortoNt(Porto portoNt) {
-		this.portoNt = portoNt;
+
+    public void iniciarSimulacao() {
+        this.simulacao.setInicio(System.currentTimeMillis());
+        run();
     }
-    
-	public ArrayList<Balsa> getBalsas() {
-		return balsas;
+
+    public void encerrarSimulacao(long fim) {
+        this.simulacao.setFim(fim);
     }
-    
-	public void setBalsas(Balsa balsa) {
-		this.balsas.add(balsa);
+
+    public void setEventosConcluidos(ArrayList<Evento> eventosConcluidos) {
+        this.eventosConcluidos = eventosConcluidos;
     }
-    
-	public ArrayList<Passageiro> getPassageiros() {
-		return passageiros;
+
+    public ArrayList<Evento> getEventosConcluidos() {
+        return eventosConcluidos;
     }
-    
-	public void setPassageiros(Passageiro passageiro) {
-		this.passageiros.add(passageiro);
-	}
-	
-	
+
+    public void run(){
+        ArrayList<Porto> portos = new ArrayList<Porto>();
+        porto1.abrirPorto();
+        porto2.abrirPorto();
+        portos.add(porto1);
+        portos.add(porto2);
+        long tempoAtual = this.simulacao.getInicio();
+        ArrayList<Porto> removeList = new ArrayList<Porto>();
+        while (!portos.isEmpty()) {
+            
+            for (Porto porto : portos) {
+                ArrayList<Evento> eventosConcluidos = porto.run(tempoAtual);
+                for(Evento evento : eventosConcluidos) {
+                    this.eventosConcluidos.add(evento);
+                }
+                if (porto.filasVazias()) {
+                    removeList.add(porto);
+                }
+            }
+            for (Porto porto : removeList) {
+                portos.remove(porto);
+            }
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
+        }
+        System.out.println("Eventos: " + eventosConcluidos);
+        for (Evento evento : eventosConcluidos) {
+            System.out.println(evento);
+        }
+        System.out.println("Cabou carai 2");
+    }
+
 }
