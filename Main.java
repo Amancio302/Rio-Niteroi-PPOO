@@ -109,9 +109,9 @@ public class Main {
     private static void incluirBalsaExpress(){
         String porto = selectPorto();
         if (porto.equals("p1")) {
-            simulador.getPorto1().addBalsa("express", new BalsaComum());
+            simulador.getPorto1().addBalsa("express", new BalsaExpress());
         } else if (porto.equals("p2")) {
-            simulador.getPorto2().addBalsa("express", new BalsaComum());
+            simulador.getPorto2().addBalsa("express", new BalsaExpress());
         }
     }
 

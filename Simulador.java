@@ -66,6 +66,7 @@ public class Simulador implements Serializable{
         while (!portos.isEmpty()) {
             
             for (Porto porto : portos) {
+                System.out.println(porto.equals(porto1) ? "P1" : "P2");
                 ArrayList<Evento> eventosConcluidos = porto.run(tempoAtual);
                 for(Evento evento : eventosConcluidos) {
                     this.eventosConcluidos.add(evento);
@@ -80,9 +81,11 @@ public class Simulador implements Serializable{
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
         }
-        System.out.println("Eventos: " + eventosConcluidos);
+        System.out.println("Eventos Concluidos");
         for (Evento evento : eventosConcluidos) {
+            System.out.println("-----");
             System.out.println(evento);
+            System.out.println("-----");
         }
         System.out.println("Cabou carai 2");
     }

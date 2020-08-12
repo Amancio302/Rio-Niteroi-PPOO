@@ -35,12 +35,8 @@ public class Porto implements Serializable{
     }
 
     public String getTipoBalsa(Balsa balsa) {
-        System.out.println(1);
         for(String nome : balsasDisponiveis.keySet()) {
-            System.out.println("------------Hash: " + nome);
-            System.out.println("------------Value: " + balsasDisponiveis.get(nome));
             for(Balsa aux : balsasDisponiveis.get(nome)) {
-                System.out.println(3);
                 if (aux.equals(balsa)) {
                     return nome;
                 }
@@ -115,7 +111,6 @@ public class Porto implements Serializable{
     }
 
     public void abrirPorto() {
-        this.tempoAtual = System.currentTimeMillis();
         setViagens(tempoAtual);
         setTravessias();
     }
@@ -139,129 +134,108 @@ public class Porto implements Serializable{
         if (!viagens.isEmpty()) {
             return false;
         }
+        for (ArrayList<Passageiro> fila : filas.values()) {
+            if (!fila.isEmpty()) {
+                return false;
+            }
+        }
         return true;
     }
 
     public EventoViagem viagemDisponivel(Passageiro passageiro) {
         String tipo = getTipoPassageiro(passageiro);
-        System.out.println(1);
         if (tipo != null) {
-            System.out.println(2);
-            System.out.println("VIAGENS: " + viagens);
             for (EventoViagem viagem : viagens) {
-                System.out.println(3);
                 if (getTipoBalsa(viagem.getBalsa()).equals(tipo)) {
-                    System.out.println(4);
                     if (viagem.getBalsa().getCargaMaxima() > viagem.getCargaAtual()) {
-                        System.out.println(5);
                         return viagem;
                     }
                 }
             }
         }
-        System.out.println(6);
         return null;
     }
 
     public void setViagens(long tempoAtual) {
         this.tempoAtual = tempoAtual;
         // Irá rodar uma única vez por porto, define a primeira viagem de suas balsas
-        System.out.println("Setando Viagens");
         balsasDisponiveis.forEach((nomeTipo, balsaList) -> {
-            System.out.println("BalsaList: " + balsaList);
             balsaList.forEach((balsa) -> {
-                System.out.println("Balsa: " + balsa);
-                System.out.println("BalsaList: " + balsaList);
-                // Cria uma nova viagem do porto atual até o porto de destino, com a balsa selecionada
-                EventoViagem viagem = new EventoViagem(balsa, this, destino);
-                // Define o tempo de início da viagem
-                viagem.setInicio(this.tempoAtual); // O tempo nesse caso será: o tempo atual da simulação
-                // Define o tempo de início do embarque
-                viagem.getEmbarque().setInicio(this.tempoAtual + 100); // O tempo nesse caso será: o mesmo valor anterior somado ao tempo de abrir as portas da balsa (considerado como 100)
-                // A viagem criada será colocada na lista de viagens
-                viagens.add(viagem);
-                // E a balsa removida da lista de balsas disponíveis
-                System.out.println("/Balsa: " + balsa);
-                System.out.println("/BalsaList: " + balsaList);
+                setBalsaViagem(balsa);
             });
         });
-        System.out.println("/Setando Viagens");
+    }
+
+    public void setBalsaViagem(Balsa balsa) {
+        // Cria uma nova viagem do porto atual até o porto de destino, com a balsa selecionada
+        EventoViagem viagem = new EventoViagem(balsa, this, destino);
+        // Define o tempo de início da viagem
+        viagem.setInicio(this.tempoAtual); // O tempo nesse caso será: o tempo atual da simulação
+        // Define o tempo de início do embarque
+        viagem.getEmbarque().setInicio(this.tempoAtual + 100); // O tempo nesse caso será: o mesmo valor anterior somado ao tempo de abrir as portas da balsa (considerado como 100)
+        // A viagem criada será colocada na lista de viagens
+        viagens.add(viagem);
+        // E a balsa removida da lista de balsas disponíveis
     }
 
     public void setTravessias() {
         // Irá rodar uma única vez por porto, criando eventos de travessia para cada passageiro nas filas
-        System.out.println("Setando Travessias");
         filas.forEach((nomeFila, fila) -> {
-            System.out.println("FILA RUN: " + fila);
             fila.forEach((passageiro) -> {
-                System.out.println("PASSAGEIRO RUN: " + passageiro);
                 EventoTravessia travessia = new EventoTravessia(passageiro);
                 // Define o início da travessia
                 travessia.setInicio(tempoAtual); // Nesse caso o tempo será: o tempo atual
                 // Define o tempo de atendimento
                 this.tempoAtual += 100;
                 travessia.setTempoAtendimento(tempoAtual); // Nesse caso  o tempo será: o tempo atual somado ao tempo de atendimento (Considerado como 100)
-                System.out.println("Travessia: " + travessia);
                 travessias.add(travessia);
             });
         });
-        System.out.println("/Setando Travessias");
-        System.out.println();
-        System.out.println();
-        System.out.println("Travessias Criadas: " + travessias);
-        System.out.println();
-        System.out.println();
     }
 
     public ArrayList<Evento> run(long tempoAtual) {
+        System.out.println("INICIO");
+        System.out.println(this);
         // Guardará todos os eventos concluídos no porto
         ArrayList<Evento> eventosConcluidos = new ArrayList<Evento>();
         // Irá iterar em cada uma das viagens iniciadas e tentará finalizá-las
         ArrayList<EventoViagem> removeViagem = new ArrayList<EventoViagem>();
-        System.out.println("Iterando viagens");
         viagens.forEach((viagem) -> {
-            System.out.println("Viagem: " + viagem);
             Balsa balsa = viagem.getBalsa();
-            System.out.println("Balsa: " + balsa);
             String tipo = getTipoBalsa(balsa);
-            System.out.println("Tipo: " + tipo);
             if (tipo != null) {
                 // Testa se a balsa pode sair, estando cheia ou não havendo fila para a mesma
-                System.out.println("Filas na tipo: " + filas.get(tipo));
-                if (balsa.getCargaMaxima() <= viagem.getCargaAtual() || filas.get(tipo).isEmpty()) {
-                    System.out.println("Passou no teste de cheio");
-                    // Define o tempo de fim do embarque
-                    viagem.getEmbarque().setFim(viagem.getEmbarque().getInicio() + (viagem.getCargaAtual() * 100)); // Nessa caso o tempo será: o tempo de início do embarque somado ao tempo para cada passageiro entrar na balsa (considerado como 100)
-                    // Define o tempo de início do desembarque
-                    viagem.getDesembarque().setInicio(balsa.getTempoViagem() + viagem.getEmbarque().getFim()); // Nesse caso o tempo será: o tempo de fim do embarque somado ao tempo de viagem da balsa
-                    // Define o tempo de fim do desembarque
-                    viagem.getDesembarque().setFim((viagem.getCargaAtual() * 100) + viagem.getDesembarque().getInicio()); // Nesse caso o tempo será: o tempo de início do desembarque somado ao tempo para cada passageiro sair da balsa (considerado como 100)
-                    // Define o tempo de fim da viagem
-                    viagem.setFim(balsa.getTempoViagem() + viagem.getDesembarque().getFim() + 100); // Nesse caso o tempo será: o tempo de fim do desembarque mais o tempo para fechar as portas da balsa (considerado como 100)
-                    // A balsa é adicionada a lista de balsas disponíveis no porto de destino
-                    viagem.getDestino().addBalsa(tipo, balsa);
-                    // O evento é adicionado a lista de eventos concluídos
-                    eventosConcluidos.add(viagem);
-                    removeViagem.add(viagem);
+                if (filas.get(tipo) != null) {
+                    if (balsa.getCargaMaxima() <= viagem.getCargaAtual() || filas.get(tipo).isEmpty()) {
+                        // Define o tempo de fim do embarque
+                        viagem.getEmbarque().setFim(viagem.getEmbarque().getInicio() + (viagem.getCargaAtual() * 100)); // Nessa caso o tempo será: o tempo de início do embarque somado ao tempo para cada passageiro entrar na balsa (considerado como 100)
+                        // Define o tempo de início do desembarque
+                        viagem.getDesembarque().setInicio(balsa.getTempoViagem() + viagem.getEmbarque().getFim()); // Nesse caso o tempo será: o tempo de fim do embarque somado ao tempo de viagem da balsa
+                        // Define o tempo de fim do desembarque
+                        viagem.getDesembarque().setFim((viagem.getCargaAtual() * 100) + viagem.getDesembarque().getInicio()); // Nesse caso o tempo será: o tempo de início do desembarque somado ao tempo para cada passageiro sair da balsa (considerado como 100)
+                        // Define o tempo de fim da viagem
+                        viagem.setFim(balsa.getTempoViagem() + viagem.getDesembarque().getFim() + 100); // Nesse caso o tempo será: o tempo de fim do desembarque mais o tempo para fechar as portas da balsa (considerado como 100)
+                        // A balsa é adicionada a lista de balsas disponíveis no porto de destino
+                        viagem.getDestino().addBalsa(tipo, balsa);
+                        viagem.getDestino().setBalsaViagem(balsa);
+                        balsasDisponiveis.get(tipo).remove(balsa);
+                        // O evento é adicionado a lista de eventos concluídos
+                        eventosConcluidos.add(viagem);
+                        removeViagem.add(viagem);
+                    }
                 }
             }
-            System.out.println("/Viagem: " + viagem);
         });
-        System.out.println("/Iterando Viagens");
         for (EventoViagem eventoViagem : removeViagem) {
             viagens.remove(eventoViagem);
         }
         ArrayList<EventoTravessia> removeTravessia = new ArrayList<EventoTravessia>();
         // Irá iterar em cada uma das travessias criadas e tentar finalizá-las
-        System.out.println("Iterando travessias");
         travessias.forEach((travessia) -> {
             Passageiro passageiro = travessia.getPassageiro();
             // Testa se a travessia já possui alguma viagem relacionada
-            System.out.println("passageio: " + passageiro);
             if (travessia.getViagem() == null) {
-                System.out.println("Nao tem viagem");
                 EventoViagem viagem = viagemDisponivel(passageiro);
-                System.out.println("Viagem virou: " + viagem);
                 // Caso haja alguma viagem disponível para o passageiro, ele será alocado a ela
                 if (viagem != null) {
                     travessia.setViagem(viagem);
@@ -273,7 +247,6 @@ public class Porto implements Serializable{
             }
             // Caso a viagem já esteja alocada
             if (travessia.getViagem() != null) {
-                System.out.println("Tem viagem");
                 EventoViagem viagem = travessia.getViagem();
                 // Testa se o desembarque da viagem já começou
                 if (travessia.getViagem().getDesembarque().getInicio() != -1) {
@@ -288,12 +261,33 @@ public class Porto implements Serializable{
                 }
             }
         });
-        System.out.println("/Iterando travesias");
         for (EventoTravessia eventoTravessia : removeTravessia) {
             travessias.remove(eventoTravessia);
         }
-        System.out.println("Concluidos: " + eventosConcluidos);
+        System.out.println("FIM");
+        System.out.println(this);
         return eventosConcluidos;
+    }
+
+    @Override
+    public String toString() {
+        return ("-----EXIBINDO DADOS DO PORTO-----\n")
+        +("\nBalsas Disponíveis\n")
+        +("\n-----\n")
+        +(balsasDisponiveis.values())
+        +("\n-----\n")
+        +("\nFilas\n")
+        +("\n-----\n")
+        +(filas.values())
+        +("\n-----\n")
+        +("\nViagens\n")
+        +("\n-----\n")
+        +(viagens)
+        +("\n-----\n")
+        +("\nTravessias\n")
+        +("\n-----\n")
+        +(travessias)
+        +("\n-----\n");
     }
 }
 
