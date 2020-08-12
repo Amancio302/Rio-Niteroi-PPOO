@@ -144,15 +144,22 @@ public class Porto implements Serializable{
 
     public EventoViagem viagemDisponivel(Passageiro passageiro) {
         String tipo = getTipoPassageiro(passageiro);
+        System.out.println(1);
         if (tipo != null) {
+            System.out.println(2);
+            System.out.println("VIAGENS: " + viagens);
             for (EventoViagem viagem : viagens) {
+                System.out.println(3);
                 if (getTipoBalsa(viagem.getBalsa()).equals(tipo)) {
+                    System.out.println(4);
                     if (viagem.getBalsa().getCargaMaxima() > viagem.getCargaAtual()) {
+                        System.out.println(5);
                         return viagem;
                     }
                 }
             }
         }
+        System.out.println(6);
         return null;
     }
 
@@ -221,13 +228,14 @@ public class Porto implements Serializable{
             if (tipo != null) {
                 // Testa se a balsa pode sair, estando cheia ou não havendo fila para a mesma
                 System.out.println("Filas na tipo: " + filas.get(tipo));
-                if (balsa.getCargaMaxima() >= viagem.getCargaAtual() || filas.get(tipo).isEmpty()) {
+                if (balsa.getCargaMaxima() <= viagem.getCargaAtual() || filas.get(tipo).isEmpty()) {
+                    System.out.println("Passou no teste de cheio");
                     // Define o tempo de fim do embarque
                     viagem.getEmbarque().setFim(viagem.getEmbarque().getInicio() + (viagem.getCargaAtual() * 100)); // Nessa caso o tempo será: o tempo de início do embarque somado ao tempo para cada passageiro entrar na balsa (considerado como 100)
                     // Define o tempo de início do desembarque
                     viagem.getDesembarque().setInicio(balsa.getTempoViagem() + viagem.getEmbarque().getFim()); // Nesse caso o tempo será: o tempo de fim do embarque somado ao tempo de viagem da balsa
                     // Define o tempo de fim do desembarque
-                    viagem.getDesembarque().setFim(balsa.getTempoViagem() + (viagem.getCargaAtual() * 100) + tempoAtual); // Nesse caso o tempo será: o tempo de início do desembarque somado ao tempo para cada passageiro sair da balsa (considerado como 100)
+                    viagem.getDesembarque().setFim((viagem.getCargaAtual() * 100) + viagem.getDesembarque().getInicio()); // Nesse caso o tempo será: o tempo de início do desembarque somado ao tempo para cada passageiro sair da balsa (considerado como 100)
                     // Define o tempo de fim da viagem
                     viagem.setFim(balsa.getTempoViagem() + viagem.getDesembarque().getFim() + 100); // Nesse caso o tempo será: o tempo de fim do desembarque mais o tempo para fechar as portas da balsa (considerado como 100)
                     // A balsa é adicionada a lista de balsas disponíveis no porto de destino
@@ -260,6 +268,7 @@ public class Porto implements Serializable{
                     viagem.addPassageiro();
                     // Define o tempo de embarque
                     travessia.setTempoEmbarque(viagem.getEmbarque().getInicio() + (viagem.getCargaAtual() * 100)); // Nesse caso o tempo será: o tempo de início do embarque na balsa somado ao tempo gasto por todos os passageiros que ingressaram antes do passageiro na balsa (considerado como 100)
+                    filas.get(getTipoPassageiro(passageiro)).remove(passageiro);
                 }
             }
             // Caso a viagem já esteja alocada

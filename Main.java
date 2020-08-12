@@ -120,13 +120,11 @@ public class Main {
     }
 
     private static void salvarDados(){
-        ManipuladorDeArquivo manipuladorDeArquivo = new ManipuladorDeArquivo();
-        manipuladorDeArquivo.salvarSimulacaoEmArquivo(simulador, "Simulacao.sim");
+        ManipuladorDeArquivo.salvarSimulacaoEmArquivo(simulador, "Simulacao.sim");
     }
 
     private static void carregarDados(){
-        ManipuladorDeArquivo manipuladorDeArquivo = new ManipuladorDeArquivo();
-        simulador = manipuladorDeArquivo.lerSimulacaoDeArquivo("Simulador.sim");
+        simulador = ManipuladorDeArquivo.lerSimulacaoDeArquivo("Simulacao.sim");
     }
 
     private static void gerarRelatorio(){
