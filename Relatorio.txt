@@ -1,2 +1,0 @@
-Tempo total simulado usando funções iniciar e encerrar simulacao: 0
-
