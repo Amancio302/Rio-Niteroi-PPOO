@@ -185,9 +185,7 @@ public class Porto implements Serializable{
                 EventoTravessia travessia = new EventoTravessia(passageiro);
                 // Define o início da travessia
                 travessia.setInicio(tempoAtual); // Nesse caso o tempo será: o tempo atual
-                // Define o tempo de atendimento
                 this.tempoAtual += 100;
-                travessia.setTempoAtendimento(tempoAtual); // Nesse caso  o tempo será: o tempo atual somado ao tempo de atendimento (Considerado como 100)
                 travessias.add(travessia);
             });
         });
@@ -212,9 +210,9 @@ public class Porto implements Serializable{
                         // Define o tempo de início do desembarque
                         viagem.getDesembarque().setInicio(balsa.getTempoViagem() + viagem.getEmbarque().getFim()); // Nesse caso o tempo será: o tempo de fim do embarque somado ao tempo de viagem da balsa
                         // Define o tempo de fim do desembarque
-                        viagem.getDesembarque().setFim((viagem.getCargaAtual() * 100) + viagem.getDesembarque().getInicio()); // Nesse caso o tempo será: o tempo de início do desembarque somado ao tempo para cada passageiro sair da balsa (considerado como 100)
+                        viagem.getDesembarque().setFim((viagem.getCargaAtual() * 100) + viagem.getDesembarque().getInicio() + 100); // Nesse caso o tempo será: o tempo de início do desembarque somado ao tempo para cada passageiro sair da balsa (considerado como 100)
                         // Define o tempo de fim da viagem
-                        viagem.setFim(balsa.getTempoViagem() + viagem.getDesembarque().getFim() + 100); // Nesse caso o tempo será: o tempo de fim do desembarque mais o tempo para fechar as portas da balsa (considerado como 100)
+                        viagem.setFim(viagem.getDesembarque().getFim() + 100); // Nesse caso o tempo será: o tempo de fim do desembarque mais o tempo para fechar as portas da balsa (considerado como 100)
                         // A balsa é adicionada a lista de balsas disponíveis no porto de destino
                         viagem.getDestino().addBalsa(tipo, balsa);
                         viagem.getDestino().setBalsaViagem(balsa);
@@ -254,10 +252,11 @@ public class Porto implements Serializable{
                     // Define o tempo de inpicio do desembarque
                     travessia.setTempoDesembarque(tempo); // O tempo nesse caso será: o tempo de início do desembarque somado ao tempo para cada passageiro sair (considerado como 100)
                     // Define o tempo de fim da travessia
-                    travessia.setFim(viagem.getDesembarque().getInicio() + viagem.getCargaAtual() * 100 + 100); // O tempo nesse caso será: o tempo anterior somado ao tempo para fechar a balsa (considerado como 100)
+                    travessia.setFim(tempo + 100); // O tempo nesse caso será: o tempo anterior somado ao tempo para fechar a balsa (considerado como 100)
                     // Adiciona a tarvessia a lista de eventos concluiídos
                     eventosConcluidos.add(travessia);
                     removeTravessia.add(travessia);
+                    viagem.removePassageiro();
                 }
             }
         });

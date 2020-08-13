@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class Evento implements Serializable{
+public class Evento implements Comparable<Evento>, Serializable{
     
     // Versão da Classe Evento
     private static final long serialVersionUID = 1L;
@@ -33,7 +33,17 @@ public class Evento implements Serializable{
 
     @Override
     public String toString() {
-        return "\nInicio: " + inicio + "\nFim: " + fim;
+        return "-----Evento-----\nInicio: " + inicio + "\nFim: " + fim;
+    }
+
+    @Override
+    public int compareTo(Evento e) {
+        if (this.fim > e.fim) {
+            return 1;
+        } else if (this.fim == e.fim) {
+            return 0;
+        }
+        return -1;
     }
 
 }

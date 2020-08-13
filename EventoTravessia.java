@@ -7,8 +7,6 @@ public class EventoTravessia extends Evento{
     private Passageiro passageiro;
     // Viagem relacionada a travessia
     private EventoViagem viagem;
-    // Tempo de atendimento, em milissegundos
-    private long tempoAtendimento;
     // Tempo de embarque, em milissegundos
     private long tempoEmbarque;
     // Tempo de desembarque, em milissegundos
@@ -18,7 +16,6 @@ public class EventoTravessia extends Evento{
         super();
         this.passageiro = passageiro;
         this.viagem = null;
-        this.tempoAtendimento = -1;
         this.tempoEmbarque = -1;
         this.tempoDesembarque = -1;
         
@@ -40,14 +37,6 @@ public class EventoTravessia extends Evento{
         return viagem;
     }
 
-    public void setTempoAtendimento(long tempoAtendimento) {
-        this.tempoAtendimento = tempoAtendimento;
-    }
-
-    public long getTempoAtendimento() {
-        return tempoAtendimento;
-    }
-
     public void setTempoEmbarque(long tempoEmbarque) {
         this.tempoEmbarque = tempoEmbarque;
     }
@@ -66,7 +55,7 @@ public class EventoTravessia extends Evento{
 
     @Override
     public String toString() {
-        return "\nPassageiro: " + passageiro + "\nViagem: " + viagem + "\nAtendimento: " + tempoAtendimento + "\nEmbarque: " + tempoEmbarque + "\nDesembarque: " + tempoDesembarque;
+        return "-----Travessia-----\nPassageiro: " + passageiro + "\nViagem: " + viagem  + "\nEmbarque: " + tempoEmbarque + "\nDesembarque: " + tempoDesembarque + "\nInicio: " + getInicio() + "\nFim:" + getFim();
     }
 
 }

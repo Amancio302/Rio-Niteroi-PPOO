@@ -9,6 +9,7 @@ public class EventoViagem extends Evento{
     private int cargaAtual;
     private Evento embarque;
     private Evento desembarque;
+    private int maxPassageiro;
 
     EventoViagem(Balsa balsa, Porto origem, Porto destino){
         super();
@@ -18,6 +19,7 @@ public class EventoViagem extends Evento{
         this.cargaAtual = 0;
         this.embarque = new Evento();
         this.desembarque = new Evento();
+        this.maxPassageiro = 0;
     }
 
     public void setBalsa(Balsa balsa) {
@@ -70,11 +72,20 @@ public class EventoViagem extends Evento{
 
     public void addPassageiro() {
         this.cargaAtual++;
+        this.maxPassageiro++;
+    }
+
+    public void removePassageiro() {
+        this.cargaAtual--;
+    }
+
+    public int getMaxPassageiro() {
+        return maxPassageiro;
     }
 
     @Override
     public String toString() {
-        return "\nBalsa: " + balsa + "\nCargaAtual: " + cargaAtual + "\nEmbarque: " + embarque + "\nDesembarque: " + desembarque;
+        return "-----VIAGEM-----\nBalsa: " + balsa + "\nCargaAtual: " + cargaAtual + "\nEmbarque: " + embarque + "\nDesembarque: " + desembarque + "\nInicio: " + getInicio() + "\nFim:" + getFim();
     }
     
 }
