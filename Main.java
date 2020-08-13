@@ -128,10 +128,10 @@ public class Main {
     }
 
     private static void gerarRelatorio(){
-
+    	simulador.gerarRelatorioEmArquivo();
     }
 
-    private static Passageiro criarPassageiro(int op) {
+	private static Passageiro criarPassageiro(int op) {
         System.out.print("CPF: ");
         String cpf = scan.nextLine();
         System.out.print("Nome: ");
@@ -173,5 +173,4 @@ public class Main {
         String nome = scan.nextLine();
         return nome.toLowerCase();
     }
-
 }
