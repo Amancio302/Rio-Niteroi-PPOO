@@ -3,7 +3,7 @@
  * Representa um tipo variante de Evento
  * @author Amancio, Jean, Leonardo e Vitor.
  */
-
+package src;
 public class EventoTravessia extends Evento{
 
     // Versão da Classe EventoTravessia

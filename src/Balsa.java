@@ -4,7 +4,7 @@
  * 
  * @author Amancio, Jean, Leonardo e Vitor.
  */
-
+package src;
 import java.io.Serializable;
 
 public class Balsa implements Serializable{

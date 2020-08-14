@@ -3,7 +3,7 @@
  * Instancia um objeto do tipo Passageiro
  * @author Amancio, Jean, Leonardo e Vitor.
  */
-
+package src;
 import java.io.Serializable;
 
 public class Passageiro implements Comparable<Passageiro>, Serializable{

@@ -3,7 +3,7 @@
  * Classe que simula toda a operação do Porto.
  * @author Amancio, Jean, Leonardo e Vitor.
  */
-
+package src;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
@@ -15,7 +15,7 @@ import java.util.HashMap;
  * Reponsável por simular toda a operação do porto
  */
 public class Simulador implements Serializable{
-
+	
     // Versão da Classe Simulador
     private static final Long serialVersionUID = 1L;
 
@@ -44,7 +44,6 @@ public class Simulador implements Serializable{
         listaDeAtendimentoPreferenciais = new ArrayList<Long>();
         listaDeVIPs = new ArrayList<Passageiro>();
         listaDeAtendimentoVIPs = new ArrayList<Long>();
-        
     }
     
     /**
@@ -108,50 +107,92 @@ public class Simulador implements Serializable{
         return eventosConcluidos;
     }
     
+    /**
+     * @return listaDeComuns
+     */
     public ArrayList<Passageiro> getListaDeComuns() {
 		return listaDeComuns;
 	}
-
+    
+    /**
+     * Atribui uma instancia para listaDeComuns.
+     * @param listaDeComuns 
+     */    
 	public void setListaDeComuns(ArrayList<Passageiro> listaDeComuns) {
 		this.listaDeComuns = listaDeComuns;
 	}
 
+	/**
+     * @return listaDeAtendimentoComuns
+     */
 	public ArrayList<Long> getListaDeAtendimentoComuns() {
 		return listaDeAtendimentoComuns;
 	}
 
+    /**
+     * Atribui uma instancia para listaDeAtendimentoComuns.
+     * @param listaDeAtendimentoComuns 
+     */
 	public void setListaDeAtendimentoComuns(ArrayList<Long> listaDeAtendimentoComuns) {
 		this.listaDeAtendimentoComuns = listaDeAtendimentoComuns;
 	}
 
+	/**
+     * @return listaDePreferenciais
+     */
 	public ArrayList<Passageiro> getListaDePreferenciais() {
 		return listaDePreferenciais;
 	}
 
+    /**
+     * Atribui uma instancia para listaDePreferenciais.
+     * @param listaDePreferenciais 
+     */
 	public void setListaDePreferenciais(ArrayList<Passageiro> listaDePreferenciais) {
 		this.listaDePreferenciais = listaDePreferenciais;
 	}
 
+	/**
+     * @return listaDeAtendimentoPreferenciais
+     */
 	public ArrayList<Long> getListaDeAtendimentoPreferenciais() {
 		return listaDeAtendimentoPreferenciais;
 	}
 
+    /**
+     * Atribui uma instancia para listaDeAtendimentoPreferenciais.
+     * @param listaDeAtendimentoPreferenciais 
+     */
 	public void setListaDeAtendimentoPreferenciais(ArrayList<Long> listaDeAtendimentoPreferenciais) {
 		this.listaDeAtendimentoPreferenciais = listaDeAtendimentoPreferenciais;
 	}
 
+	/**
+     * @return listaDeVIPs
+     */
 	public ArrayList<Passageiro> getListaDeVIPs() {
 		return listaDeVIPs;
 	}
-
+	
+    /**
+     * Atribui uma instancia para listaDeVIPs.
+     * @param listaDeVIPs 
+     */
 	public void setListaDeVIPs(ArrayList<Passageiro> listaDeVIPs) {
 		this.listaDeVIPs = listaDeVIPs;
 	}
 
+	/**
+     * @return listaDeAtendimentoVIPs
+     */
 	public ArrayList<Long> getListaDeAtendimentoVIPs() {
 		return listaDeAtendimentoVIPs;
 	}
 
+    /**
+     * Atribui uma instancia para listaDeAtendimentoVIPs.
+     * @param listaDeAtendimentoVIPs 
+     */
 	public void setListaDeAtendimentoVIPs(ArrayList<Long> listaDeAtendimentoVIPs) {
 		this.listaDeAtendimentoVIPs = listaDeAtendimentoVIPs;
     }

@@ -3,7 +3,7 @@
  * Representa um tipo variante da classe Passageiro
  * @author Amancio, Jean, Leonardo e Vitor.
  */
-
+package src;
 public class PassageiroComum extends Passageiro{
 
     // Versão da Classe PassageiroComum

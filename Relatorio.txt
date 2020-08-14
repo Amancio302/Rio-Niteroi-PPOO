@@ -1,0 +1,20 @@
+Nome Passageiro Comum: 1 Tempo atendimento: 15100
+Tempo total simulado: 15500
+
+Numero de eventos tratados: 2
+Total de travessias de passageiros: 1
+Total de viagens das balsas: 1
+
+Tempo médio de espera na fila: 200
+Tamanho medio da fila: 1
+Tamanho máximo da fila: 1
+Quantidade de Passageiros Comuns: 1
+Tempo médio de atendimento: 15100
+Quantidade de Passageiros Preferenciais: 0
+Tempo médio de atendimento: NaN
+Quantidade de Passageiros VIP: 0
+Tempo médio de atendimento: NaN
+Quantidade de Viagens de Balsas Comuns: 1
+Tempo médio de atendimento: 15300
+Quantidade de Viagens de Balsas Express: 0
+Tempo médio de atendimento: NaN

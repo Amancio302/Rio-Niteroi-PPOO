@@ -3,7 +3,7 @@
  * Representa um tipo variante da classe Balsa
  * @author Amancio, Jean, Leonardo e Vitor.
  */
-
+package src;
 public class BalsaExpress extends Balsa{
     
     // Versão da Classe BalsaExpress

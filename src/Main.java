@@ -2,13 +2,13 @@
  * Classe principal.
  * @author Amancio, Jean, Leonardo e Vitor.
  */
-
+package src;
 import java.util.Scanner;
 
 public class Main {
 
     public static Scanner scan;
-    public static Simulador simulador;
+    private static Simulador simulador;
     public static Plot plot;
 
     public static void main(String[] args) {
@@ -181,4 +181,11 @@ public class Main {
         String nome = scan.nextLine();
         return nome.toLowerCase();
     }
+    
+	public static Simulador getInstance(){
+    	if(simulador == null){
+    		simulador = new Simulador();
+        }
+        return simulador;
+	}
 }

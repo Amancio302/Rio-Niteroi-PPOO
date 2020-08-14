@@ -3,7 +3,7 @@
  * Manipula o Arquivo
  * @author Amancio, Jean, Leonardo e Vitor.
  */
-
+package src;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;

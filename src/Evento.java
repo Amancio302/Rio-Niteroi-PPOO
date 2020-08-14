@@ -3,7 +3,7 @@
  * Representa um Evento
  * @author Amancio, Jean, Leonardo e Vitor.
  */
-
+package src;
 import java.io.Serializable;
 
 public class Evento implements Comparable<Evento>, Serializable{
