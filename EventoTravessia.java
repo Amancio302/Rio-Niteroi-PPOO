@@ -2,7 +2,6 @@ public class EventoTravessia extends Evento{
 
     // Versão da Classe EventoTravessia
     private static final long serialVersionUID = 1L;
-
     // Passageiro relacionado a travessia
     private Passageiro passageiro;
     // Viagem relacionada a travessia
@@ -52,10 +51,10 @@ public class EventoTravessia extends Evento{
     public long getTempoDesembarque() {
         return tempoDesembarque;
     }
-
+    
     @Override
     public String toString() {
-        return "-----Travessia-----\nPassageiro: " + passageiro + "\nViagem: " + viagem  + "\nEmbarque: " + tempoEmbarque + "\nDesembarque: " + tempoDesembarque + "\nInicio: " + getInicio() + "\nFim:" + getFim();
+        return "-----Travessia-----\nPassageiro: " + passageiro + "\nViagem: " + viagem  + "\nEmbarque: " + tempoEmbarque + "\nDesembarque: " + tempoDesembarque + "\nInicio Travessia: " + getInicio() + "\nFim Travessia:" + getFim();
     }
 
 }

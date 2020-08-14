@@ -85,7 +85,7 @@ public class EventoViagem extends Evento{
 
     @Override
     public String toString() {
-        return "-----VIAGEM-----\nBalsa: " + balsa + "\nCargaAtual: " + cargaAtual + "\nEmbarque: " + embarque + "\nDesembarque: " + desembarque + "\nInicio: " + getInicio() + "\nFim:" + getFim();
+        return "-----VIAGEM-----\nBalsa: " + balsa + "\nCargaAtual: " + cargaAtual + "\nEmbarque: " + embarque + "\nDesembarque: " + desembarque + "\nInicio Viagem: " + getInicio() + "\nFim Viagem:" + getFim();
     }
     
 }

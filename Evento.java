@@ -33,7 +33,7 @@ public class Evento implements Comparable<Evento>, Serializable{
 
     @Override
     public String toString() {
-        return "-----Evento-----\nInicio: " + inicio + "\nFim: " + fim;
+        return "-----Evento-----\nInicio Evento: " + inicio + "\nFim Evento: " + fim;
     }
 
     @Override

@@ -261,6 +261,8 @@ public class Porto implements Serializable{
             }
         });
         for (EventoTravessia eventoTravessia : removeTravessia) {
+        	System.out.println(eventoTravessia);
+        	System.out.println("\nEvento travessia deletado \n\n");
             travessias.remove(eventoTravessia);
         }
         System.out.println("FIM");

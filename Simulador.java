@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 /**
  * Classe Simulador
  * Reponsável por simular toda a operação do porto
@@ -10,18 +11,31 @@ import java.util.Collections;
 public class Simulador implements Serializable{
 
     // Versão da Classe Simulador
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
 
     private Porto porto1;
     private Porto porto2;
     private Evento simulacao;
     private ArrayList<Evento> eventosConcluidos;
+    private ArrayList<Passageiro> listaDeComuns;
+    private ArrayList<Long> listaDeAtendimentoComuns;
+    private ArrayList<Passageiro> listaDePreferenciais;
+    private ArrayList<Long> listaDeAtendimentoPreferenciais;
+    private ArrayList<Passageiro> listaDeVIPs;
+    private ArrayList<Long> listaDeAtendimentoVIPs;
     
     Simulador () {
         this.porto1 = null;
         this.porto2 = null;
         this.simulacao = new Evento();
         eventosConcluidos = new ArrayList<Evento>();
+        listaDeComuns = new ArrayList<Passageiro>();
+        listaDeAtendimentoComuns = new ArrayList<Long>();
+        listaDePreferenciais = new ArrayList<Passageiro>();
+        listaDeAtendimentoPreferenciais = new ArrayList<Long>();
+        listaDeVIPs = new ArrayList<Passageiro>();
+        listaDeAtendimentoVIPs = new ArrayList<Long>();
+        
     }
     
     public void setPorto1(Porto porto1) {
@@ -45,7 +59,7 @@ public class Simulador implements Serializable{
         run();
     }
 
-    public void encerrarSimulacao(long fim) {
+    public void encerrarSimulacao(Long fim) {
         this.simulacao.setFim(fim);
     }
 
@@ -57,7 +71,55 @@ public class Simulador implements Serializable{
         return eventosConcluidos;
     }
     
-    public void gerarRelatorioEmArquivo(){
+    public ArrayList<Passageiro> getListaDeComuns() {
+		return listaDeComuns;
+	}
+
+	public void setListaDeComuns(ArrayList<Passageiro> listaDeComuns) {
+		this.listaDeComuns = listaDeComuns;
+	}
+
+	public ArrayList<Long> getListaDeAtendimentoComuns() {
+		return listaDeAtendimentoComuns;
+	}
+
+	public void setListaDeAtendimentoComuns(ArrayList<Long> listaDeAtendimentoComuns) {
+		this.listaDeAtendimentoComuns = listaDeAtendimentoComuns;
+	}
+
+	public ArrayList<Passageiro> getListaDePreferenciais() {
+		return listaDePreferenciais;
+	}
+
+	public void setListaDePreferenciais(ArrayList<Passageiro> listaDePreferenciais) {
+		this.listaDePreferenciais = listaDePreferenciais;
+	}
+
+	public ArrayList<Long> getListaDeAtendimentoPreferenciais() {
+		return listaDeAtendimentoPreferenciais;
+	}
+
+	public void setListaDeAtendimentoPreferenciais(ArrayList<Long> listaDeAtendimentoPreferenciais) {
+		this.listaDeAtendimentoPreferenciais = listaDeAtendimentoPreferenciais;
+	}
+
+	public ArrayList<Passageiro> getListaDeVIPs() {
+		return listaDeVIPs;
+	}
+
+	public void setListaDeVIPs(ArrayList<Passageiro> listaDeVIPs) {
+		this.listaDeVIPs = listaDeVIPs;
+	}
+
+	public ArrayList<Long> getListaDeAtendimentoVIPs() {
+		return listaDeAtendimentoVIPs;
+	}
+
+	public void setListaDeAtendimentoVIPs(ArrayList<Long> listaDeAtendimentoVIPs) {
+		this.listaDeAtendimentoVIPs = listaDeAtendimentoVIPs;
+	}
+
+	public void gerarRelatorioEmArquivo(){
     	String nomeArquivo = "Relatorio.txt";
     	Collections.sort(eventosConcluidos);
     	int totalTravessia = 0;
@@ -107,10 +169,29 @@ public class Simulador implements Serializable{
         	}
         }
         try(FileWriter arq = new FileWriter(nomeArquivo)){
+        	// Passageiros
+        	for (Evento evento : eventosConcluidos) {
+        		if (evento instanceof EventoTravessia) {
+        			EventoTravessia temp = (EventoTravessia) evento;
+		        	if (temp.getPassageiro() instanceof PassageiroComum) {
+		        		arq.write("Nome Passageiro Comum: " + temp.getPassageiro().getNome() + " Tempo atendimento: " + (temp.getTempoDesembarque() - temp.getTempoEmbarque()));
+		        		arq.write("\n" );
+		        		listaDeComuns.add(temp.getPassageiro());
+		        		listaDeAtendimentoComuns.add(temp.getTempoDesembarque() - temp.getTempoEmbarque());
+		        	} else if (temp.getPassageiro() instanceof PassageiroPreferencial) {
+		        		arq.write("Nome Passageiro Pref: " + temp.getPassageiro().getNome() + " Tempo atendimento: " + (temp.getTempoDesembarque() - temp.getTempoEmbarque()));
+		    			arq.write("\n" );
+		    			listaDePreferenciais.add(temp.getPassageiro());
+		    			listaDeAtendimentoPreferenciais.add(temp.getTempoDesembarque() - temp.getTempoEmbarque());
+		        	} else {
+		        		arq.write("Nome Passageiro Pref: " + temp.getPassageiro().getNome() + " Tempo atendimento: " + (temp.getTempoDesembarque() - temp.getTempoEmbarque()));
+		    			arq.write("\n" );
+		    			listaDeVIPs.add(temp.getPassageiro());
+		    			listaDeAtendimentoVIPs.add(temp.getTempoDesembarque() - temp.getTempoEmbarque());
+		        	}
+	        	}
+        	}
             // Tempo total simulado
-        	arq.write("Tempo total simulado usando fun��es iniciar e encerrar simulacao: " + (this.simulacao.getFim() - this.simulacao.getInicio()) );
-        	arq.write("\n" );
-        	arq.write("\n" );
         	arq.write("Tempo total simulado: " + eventosConcluidos.get(eventosConcluidos.size() - 1).getFim());
             arq.write("\n" );
             arq.write("\n" );
@@ -164,7 +245,7 @@ public class Simulador implements Serializable{
         porto2.abrirPorto();
         portos.add(porto1);
         portos.add(porto2);
-        long tempoAtual = this.simulacao.getInicio();
+        Long tempoAtual = this.simulacao.getInicio();
         ArrayList<Porto> removeList = new ArrayList<Porto>();
         while (!portos.isEmpty()) {
             

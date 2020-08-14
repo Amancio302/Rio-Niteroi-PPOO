@@ -4,10 +4,12 @@ public class Main {
 
     public static Scanner scan;
     public static Simulador simulador;
+    public static Plot plot;
 
     public static void main(String[] args) {
         scan = new Scanner(System.in);
         simulador = new Simulador();
+        plot = new Plot();
         Porto p1 = new Porto();
         Porto p2 = new Porto();
         p1.setDestino(p2);
@@ -53,6 +55,7 @@ public class Main {
             incluirBalsaExpress();
         } else if (op.equals("f")) {
             iniciarSimulacao();
+            plot.runPlot(simulador);
         } else if (op.equals("g")) {
             salvarDados();
         } else if (op.equals("h")) {

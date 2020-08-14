@@ -1,2 +1,22 @@
-Tempo total simulado usando fun��es iniciar e encerrar simulacao: 0
+Nome Passageiro Pref: 3 Tempo atendimento: 8100
+Nome Passageiro Pref: 2 Tempo atendimento: 15100
+Nome Passageiro Comum: 1 Tempo atendimento: 15300
+Tempo total simulado: 15700
 
+Numero de eventos tratados: 5
+Total de travessias de passageiros: 3
+Total de viagens das balsas: 2
+
+Tempo médio de espera na fila: 233
+Tamanho medio da fila: 1
+Tamanho máximo da fila: 2
+Quantidade de Passageiros Comuns: 1
+Tempo médio de atendimento: 15300
+Quantidade de Passageiros Preferenciais: 1
+Tempo médio de atendimento: 15100
+Quantidade de Passageiros VIP: 1
+Tempo médio de atendimento: 8100
+Quantidade de Viagens de Balsas Comuns: 1
+Tempo médio de atendimento: 15500
+Quantidade de Viagens de Balsas Express: 1
+Tempo médio de atendimento: 8300
